@@ -107,7 +107,7 @@ function getPalindromes(txt){
     let palindromes = [];
     for (let i = 0; i < wordsArr.length; i++){
         word = wordsArr[i].toLowerCase();
-        if (isPalindrome(word) && word.length != 1){
+        if (isPalindrome(word) && word.length >= 3){
             palindromes.push(word);
         }
     }
