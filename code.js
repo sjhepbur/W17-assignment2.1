@@ -107,7 +107,7 @@ function getPalindromes(txt){
     let palindromes = [];
     for (let i = 0; i < wordsArr.length; i++){
         word = wordsArr[i].toLowerCase();
-        if (isPalindrome(word) && word.length >= 3){
+        if (isPalindrome(word) && word.length >= 3 && !inArray(palindromes, word)){
             palindromes.push(word);
         }
     }
@@ -125,20 +125,23 @@ function getLongestWords(txt){
     longest_words = [];
     for (let i = 0; i < wordsArr.length; i++){
         word = wordsArr[i].toLowerCase();
-        if (longest_words.length == 0 || longest_words.length < 10){
+        if ((longest_words.length == 0 || longest_words.length < 10) && !inArray(longest_words, word)){
             longest_words.push(word);
+            longest_words = sortLongestArray(longest_words);
         }
         else{
-            if (wordsArr[i].length > longest_words[longest_words.length - 1].length && !inArray(longest_words, word)){
-                longest_words.splice(-1,1);
+            if (wordsArr[i].length >= longest_words[longest_words.length - 1].length && !inArray(longest_words, word)){
+                // longest_words.splice(-1,1);
                 longest_words.push(word);
+                longest_words = sortLongestArray(longest_words);
+                longest_words.splice(-1,1);
             }
         }
-        longest_words = sortLongestArray(longest_words);
     }
     return longest_words;
 }
 
+//Function that checks if a word is in an array
 function inArray(array, word){
     return array.indexOf(word) > -1;
 }
